@@ -6,7 +6,7 @@ const tourLocations = [
         "activity": "https://www.youtube.com/watch?v=VPbCv4bzlaI",
         "thumbnail": "",
         "lat": 32.100441318953536,
-        "lng":  34.82640102404712
+        "lng": 34.82640102404712
     },
     {
         "id": 2,
@@ -15,7 +15,7 @@ const tourLocations = [
         "activity": "#",
         "thumbnail": "",
         "lat": 32.090546775572186,
-        "lng":  34.8185232318643
+        "lng": 34.8185232318643
     },
     {
         "id": 3,
@@ -24,6 +24,6 @@ const tourLocations = [
         "activity": "https://clap-lab.com/games/form/511",
         "thumbnail": "",
         "lat": 32.083038578566324,
-        "lng":  34.81447857703094
+        "lng": 34.81447857703094
     }
 ]

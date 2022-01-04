@@ -1,18 +1,5 @@
 let map;
-
 const ACTIVITY_RADIUS = 20;
-const tourLocations = [
-  {
-    id: 1,
-    name: "גולן אדום",
-    description: "תיאור כללי של המשחק או הפעילות שצריך לבצע לפני הצפיה במקום",
-    activity: "https://www.google.com",
-    thumbnail: "",
-    lat: 32.0707809,
-    lng: 34.8236409
-  }
-];
-
 let currLoc;
 
 function initMap() {
@@ -26,7 +13,28 @@ function initMap() {
 function getLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(showPosition);
+    navigator.geolocation.watchPosition(updatePosition);
   }
+}
+
+function updatePosition(geoPos) {
+  position = { lat: +geoPos.coords.latitude, lng: +geoPos.coords.longitude };
+  if (!currLoc || currLoc.lat !== position.lat || currLoc.lng !== position.lng) {
+    currLoc = {
+      lat: position.lat,
+      lng: position.lng
+    };
+
+    checkProximity();
+  }
+}
+
+function checkProximity() {
+  tourLocations.forEach(location => {
+    if (haversineDistance(currLoc, location) <= ACTIVITY_RADIUS) {
+      displayPopup(location);
+    }
+  });
 }
 
 function haversineDistance(mk1, mk2) {
@@ -41,13 +49,8 @@ function haversineDistance(mk1, mk2) {
 }
 
 function showPosition(position) {
-  //currLoc = { lat: +position.coords.latitude, lng: +position.coords.longitude };
-  currLoc = {
-    lat: 32.0707809,
-    lng: 34.8286409
-  };
-  console.log(currLoc);
-
+  // currLoc = { lat: +position.coords.latitude, lng: +position.coords.longitude };
+  updatePosition(position);
   map.setCenter(currLoc);
 
   const currLocMarker = new google.maps.Marker({
@@ -71,14 +74,12 @@ function showPosition(position) {
       radius: ACTIVITY_RADIUS,
     });
   });
-
-  console.log(haversineDistance(currLoc, tourPos));
 }
 
-function displayPopup(position) {
-  $("#locationModalDescription").html(position.description);
-  $("#locationModalLabel").html(position.name);
-  $("#locationModalActivity").attr("href", position.activity);
+function displayPopup(location) {
+  $("#locationModalDescription").html(location.description);
+  $("#locationModalLabel").html(location.name);
+  $("#locationModalActivity").attr("href", location.activity);
   $("#locationModal").modal();
 }
 
