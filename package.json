@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "start": "node backend/index.js"
+  },
   "dependencies": {
     "express": "^4.17.2"
   }
