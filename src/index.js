@@ -1,6 +1,13 @@
 let map;
 
-const tourPos = {
+
+const tourPos = 
+{
+  id: 1,
+  name: "גולן אדום",
+  description: "תיאור כללי של המשחק או הפעילות שצריך לבצע לפני הצפיה במקום",
+  activity: "https://www.google.com",
+  thumbnail: "",
   lat: 32.0707809,
   lng: 34.8236409
 };
@@ -57,4 +64,11 @@ function showPosition(position) {
     center: tourPos,
     radius: 20,
   });
+}
+
+function displayPopup(position) {
+  $("#locationModalDescription").html(position.description);
+  $("#locationModalLabel").html(position.name);
+  $("#locationModalActivity").attr("href", position.activity);
+  $("#locationModal").modal();
 }
