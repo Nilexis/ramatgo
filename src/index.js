@@ -4,9 +4,9 @@ const ACTIVITY_RADIUS = 20;
 const tourLocations = [
   {
     id: 1,
-    name: "מארכז",
-    description: "",
-    activity: "",
+    name: "גולן אדום",
+    description: "תיאור כללי של המשחק או הפעילות שצריך לבצע לפני הצפיה במקום",
+    activity: "https://www.google.com",
     thumbnail: "",
     lat: 32.0707809,
     lng: 34.8236409
@@ -73,4 +73,11 @@ function showPosition(position) {
   });
 
   console.log(haversineDistance(currLoc, tourPos));
+}
+
+function displayPopup(position) {
+  $("#locationModalDescription").html(position.description);
+  $("#locationModalLabel").html(position.name);
+  $("#locationModalActivity").attr("href", position.activity);
+  $("#locationModal").modal();
 }
