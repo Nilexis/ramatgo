@@ -81,3 +81,8 @@ function displayPopup(position) {
   $("#locationModalActivity").attr("href", position.activity);
   $("#locationModal").modal();
 }
+
+function toggleIframeMap() {
+  $("#map").css("display") == 'none' ? $("#map").css("display", "block") : $("#map").css("display", "none");
+  $("#activityIframe").css("display") == 'none' ? $("#activityIframe").css("display", "block") : $("#activityIframe").css("display", "none");
+}
