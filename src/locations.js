@@ -3,7 +3,7 @@ const tourLocations = [
         "id": 1,
         "name": "קניון איילון",
         "description": "תיאור על המשחק של קניון איילון",
-        "activity": "https://www.youtube.com/watch?v=VPbCv4bzlaI",
+        "activity": "https://view.genial.ly/61d46756d262b80d6560d972/",
         "thumbnail": "",
         "lat": 32.100441318953536,
         "lng": 34.82640102404712
