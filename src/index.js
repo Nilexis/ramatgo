@@ -11,6 +11,8 @@ function initMap() {
   getLocation();
   setTimeout(() => {
     updatePosition({ lat: +tourLocations[2].lat, lng: +tourLocations[2].lng });
+    map.setCenter(currLoc);
+
   }, 20000);
 }
 
@@ -93,7 +95,24 @@ function showPosition(position) {
 function displayPopup(location) {
   $("#locationModalDescription").html(location.description);
   $("#locationModalLabel").html(location.name);
-  $("#locationModalActivity").attr("href", location.activity);
-  $("#locationModal").modal();
+  $("#locationModal").modal('show');
+
+  $("#locationModalActivity").attr("value", location.activity);
+  console.log("location activity ",location.activity);
+  $('#locationModalActivity').click(obClickLaunchActivity);
 }
 
+function toggleIframeMap() {
+  $("#map").css("display") == 'none' ? $("#map").css("display", "block") : $("#map").css("display", "none");
+  $("#activityIframe").css("display") == 'none' ? $("#activityIframe").css("display", "block") : $("#activityIframe").css("display", "none");
+}
+
+function obClickLaunchActivity(e) {
+  $("#activityIframe").attr("src", $("#locationModalActivity").attr("value") );
+  $("#locationModal").modal('hide');
+  toggleIframeMap();
+}
+
+$(document).ready(function () {
+  $("#closeIframeBtn").click(toggleIframeMap);
+});

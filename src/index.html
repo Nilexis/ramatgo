@@ -17,8 +17,13 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand"  id="logo" href="#"><img src="images/logo-s.svg"> RamatGo</a>
     </nav>
-    <div id="map"></div>
 
+    <button type="button" class="close" id="closeIframeBtn" aria-label="Close" style="position: absolute; top: 140px; left: 30px; transform: scale(3);">
+        <span aria-hidden="true">&times;</span>
+      </button>
+
+    <div id="map"></div>
+        <iframe id="activityIframe" class="embed-responsive-item" src="" style="display: none; height: 88%; width: 100vw;" allowfullscreen></iframe>
     <div class="modal fade" id="locationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -33,7 +38,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <a href="#" class="btn btn-primary" id="locationModalActivity" role="button">Launch Activity</a>
+              <button href="#" class="btn btn-primary" id="locationModalActivity" role="button">Launch Activity</button>
             </div>
           </div>
         </div>
