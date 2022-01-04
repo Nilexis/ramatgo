@@ -21,7 +21,7 @@ const tourLocations = [
         "id": 3,
         "name": "בית העירייה רמת גן",
         "description": "בית העירייה הוא מקום עבודתו של ראש העיר וצוותו שממנו מגיעות הוראותיו של ראש העיר במהלך הפעילות תשאלו מה שאלות על בית העירייה ועל אחד מראשי העיר הראשונים",
-        "activity": "https://clap-lab.com/games/form/511",
+        "activity": "https://view.genial.ly/61d3edf18c5af20d868622ec",
         "thumbnail": "",
         "lat": 32.083038578566324,
         "lng": 34.81447857703094
