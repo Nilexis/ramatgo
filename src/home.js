@@ -2,6 +2,8 @@ let map;
 const ACTIVITY_RADIUS = 20;
 let currLoc;
 let currLocMarker;
+let watchId;
+let isDemoMode = false;
 
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
@@ -9,17 +11,15 @@ function initMap() {
     zoom: 18,
   });
   getLocation();
-  setTimeout(() => {
-    updatePosition({ lat: +tourLocations[2].lat, lng: +tourLocations[2].lng });
-    map.setCenter(currLoc);
-
-  }, 20000);
 }
 
 function getLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(showPosition);
-    // navigator.geolocation.watchPosition(updateGeoPosition);
+
+    if (!isDemoMode) {
+      watchId = navigator.geolocation.watchPosition(updateGeoPosition);
+    }
   }
 }
 
@@ -48,8 +48,24 @@ function updatePosition(position) {
     });
 
     currLocMarker.setMap(map);
-
     checkProximity();
+  }
+}
+
+function toggleDemoMode() {
+  isDemoMode = !isDemoMode;
+
+  if (isDemoMode) {
+    navigator.geolocation.clearWatch(watchId);
+    updatePosition({ lat: +tourLocations[2].lat, lng: +tourLocations[2].lng });
+    map.setCenter(currLoc);
+    $("#demoToggler").addClass("btn-warning");
+    $("#demoToggler").removeClass("btn-outline-warning");
+  } else {
+    watchId = navigator.geolocation.watchPosition(updateGeoPosition);
+    setTimeout(() => map.setCenter(currLoc), 1);
+    $("#demoToggler").addClass("btn-outline-warning");
+    $("#demoToggler").removeClass("btn-warning");
   }
 }
 
@@ -98,7 +114,6 @@ function displayPopup(location) {
   $("#locationModal").modal('show');
 
   $("#locationModalActivity").attr("value", location.activity);
-  console.log("location activity ",location.activity);
   $('#locationModalActivity').click(obClickLaunchActivity);
 }
 
@@ -108,11 +123,12 @@ function toggleIframeMap() {
 }
 
 function obClickLaunchActivity(e) {
-  $("#activityIframe").attr("src", $("#locationModalActivity").attr("value") );
+  $("#activityIframe").attr("src", $("#locationModalActivity").attr("value"));
   $("#locationModal").modal('hide');
   toggleIframeMap();
 }
 
 $(document).ready(function () {
   $("#closeIframeBtn").click(toggleIframeMap);
+  $("#demoToggler").click(toggleDemoMode);
 });
