@@ -81,9 +81,17 @@ function displayPopup(location) {
   $("#locationModalLabel").html(location.name);
   $("#locationModalActivity").attr("href", location.activity);
   $("#locationModal").modal();
+
+  $("#locationModalActivity").value = location.activity;
+  $('#locationModalActivity').click(obClickLaunchActivity);
 }
 
 function toggleIframeMap() {
   $("#map").css("display") == 'none' ? $("#map").css("display", "block") : $("#map").css("display", "none");
   $("#activityIframe").css("display") == 'none' ? $("#activityIframe").css("display", "block") : $("#activityIframe").css("display", "none");
+}
+
+function obClickLaunchActivity(e) {
+  $("#activityIframe").attr("src", e.value);
+  toggleIframeMap();
 }
